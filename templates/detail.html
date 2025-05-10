@@ -1,0 +1,16 @@
+{% extends 'layouts/master.html' %}
+{% block content %}
+  <section style="margin-top: 55px;">
+    <h2>Detaile du formation</h2>
+    <div class="formations">
+        <img src="{{detail_formation.image.url}}" alt="">
+        <h3>{{detail_formation.nom}}</h3>
+        <p>Description : {{detail_formation.description}}</p>
+        <p>Durée : {{detail_formation.duree}}</p>
+        <p>Frais de formation : {{detail_formation.frais_formation}}</p>
+        <p>Date Debut de formation : {{detail_formation.debut_formation}}</p>
+        <p>Detail de programme : {{detail_formation.detail_programme}}</p>
+        
+    </div>
+  </section>
+{% endblock %}

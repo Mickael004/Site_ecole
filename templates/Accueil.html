@@ -1,110 +1,92 @@
 {% extends 'layouts/master.html' %}
 {% load static %}
 {% block content %}
-
-       <!-- Section Header -->
-    <header class="header-with-bg">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row justify-content-center align-items-center" style="height: 100vh;">
-                <div class="col-lg-8 text-center text-white">
-                    <h1 class="display-4">Bienvenue à l'École d'Informatique</h1>
-                    <p class="lead">Former les leaders numériques de demain</p>
-                    <a href="#formations" class="btn btn-primary">Découvrir nos formations</a>
-                </div>
-            </div>
+  <!-- Section Header -->
+  <header class="header-with-bg">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row justify-content-center align-items-center" style="height: 100vh;">
+        <div class="col-lg-8 text-center text-white">
+          <h1 class="display-4">Bienvenue à l'École d'Informatique</h1>
+          <p class="lead">Former les leaders numériques de demain</p>
+          <a href="#formations" class="btn btn-primary">Découvrir nos formations</a>
         </div>
-    </header>
+      </div>
+    </div>
+  </header>
 
+  <!-- Section Présentation -->
+  <section class="presentation container bg-primary">
+    <h2 class="text-center mb-4">Notre École</h2>
+    <p class="text-center">Nous offrons des formations de qualité dans le domaine de l'informatique. Notre objectif est de préparer nos étudiants à réussir dans un monde numérique en constante évolution.</p>
+  </section>
 
+  <!-- Section Formations -->
+  <section class="bg-light py-5" id="formations">
+    <div class="container">
+      <h2 class="text-center mb-4">Nos Formations</h2>
+      <div class="row">
+        {% for form in formation %}
+          <div class="col-md-4">
+            <div class="card">
+              <img src="{{form.image.url}}" class="card-img-top" alt="Formation 1" />
+              <div class="card-body">
+                <h5 class="card-title">{{form.nom}}</h5>
+                <p class="card-text">{{form.description}}</p>
+                <p>Durée : {{form.duree}} mois</p>
+                <button>
 
-    <!-- Section Présentation -->
-    <section class="presentation container  bg-primary ">
-
-        <h2 class="text-center mb-4">Notre École</h2>
-        <p class="text-center">Nous offrons des formations de qualité dans le domaine de l'informatique. Notre objectif
-            est de préparer nos étudiants à réussir dans un monde numérique en constante évolution.</p>
-
-    </section>
-
-    <!-- Section Formations -->
-    <section class="bg-light py-5" id="formations">
-        <div class="container">
-            <h2 class="text-center mb-4">Nos Formations</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src=" {% static 'images/images (5).jpeg' %} " class="card-img-top" alt="Formation 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Développement Web</h5>
-                            <p class="card-text">Apprenez à créer des sites web modernes et performants.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src=" {% static 'images/cybersecurite.jpeg' %} " class="card-img-top" alt="Formation 2">
-                        <div class="card-body">
-                            <h5 class="card-title">Cybersécurité</h5>
-                            <p class="card-text">Protégez les systèmes et les données contre les cyberattaques.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="{% static 'images/images (9).jpeg' %} " class="card-img-top" alt="Formation 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Intelligence Artificielle</h5>
-                            <p class="card-text">Découvrez les bases de l'IA et ses applications pratiques.</p>
-                        </div>
-                    </div>
-                </div>
+                    <a href="{% url 'detail_form' form.id %}">Detail Formation</a>
+                </button>
+              </div>
             </div>
+          </div>
+        {% endfor %}
+    </div>
+    <div>
+        <a href="{% url 'plus_formation' %}">Voir plus formations</a>
+    </div>
+    </div>
+  </section>
+
+  <!-- Section Témoignages -->
+  <section class="container my-5">
+    <h2 class="text-center mb-4">Témoignages</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <blockquote class="blockquote">
+          <p>"J'ai acquis des compétences précieuses grâce à cette école."</p>
+          <footer class="blockquote-footer">Eric Jaona, Étudiant</footer>
+        </blockquote>
+      </div>
+      <div class="col-md-6">
+        <blockquote class="blockquote">
+          <p>"Un environnement d'apprentissage exceptionnel."</p>
+          <footer class="blockquote-footer">Bekoto Mariezz, Diplômée</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulaire de Contact -->
+  <section class="bg-dark text-white py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Contactez-nous</h2>
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label">Nom</label>
+          <input type="text" class="form-control" id="name" placeholder="Votre nom" />
         </div>
-    </section>
-
-
-    <!-- Section Témoignages -->
-    <section class="container my-5">
-        <h2 class="text-center mb-4">Témoignages</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <blockquote class="blockquote">
-                    <p>"J'ai acquis des compétences précieuses grâce à cette école."</p>
-                    <footer class="blockquote-footer">Eric Jaona, Étudiant</footer>
-                </blockquote>
-            </div>
-            <div class="col-md-6">
-                <blockquote class="blockquote">
-                    <p>"Un environnement d'apprentissage exceptionnel."</p>
-                    <footer class="blockquote-footer">Bekoto Mariezz, Diplômée</footer>
-                </blockquote>
-            </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Votre email" />
         </div>
-    </section>
-
-    <!-- Formulaire de Contact -->
-    <section class="bg-dark text-white py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Contactez-nous</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nom</label>
-                    <input type="text" class="form-control" id="name" placeholder="Votre nom">
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Votre email">
-                </div>
-                <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="3" placeholder="Votre message"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Envoyer</button>
-            </form>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" id="message" rows="3" placeholder="Votre message"></textarea>
         </div>
-    </section>
-
-
-{% endblock content %}
-
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+      </form>
+    </div>
+  </section>
+{% endblock %}
