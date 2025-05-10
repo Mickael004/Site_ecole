@@ -1,0 +1,29 @@
+{% extends 'layouts/master.html' %}
+{% load static %}
+
+{% block content %}
+  <section class="login-form d-flex align-items-center justify-content-center">
+    <div class="card shadow-lg" style="width: 400px; background-color: #ffffff;">
+      <div class="card-body p-5">
+        <h2 class="text-center mb-4">Connexion</h2>
+        <form>
+          <div class="mb-3">
+            <label for="username" class="form-label">Nom d'utilisateur ou Email</label>
+            <input type="text" class="form-control" id="username" placeholder="Entrez votre nom d'utilisateur" />
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe" />
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+        </form>
+
+        <p class="text-center mt-3">
+          Pas encore inscrit ? <a href="{% url 'registerpage' %}">Inscrivez-vous ici</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

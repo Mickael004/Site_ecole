@@ -1,0 +1,125 @@
+:root{
+    --primary:#007bff;
+    --secondary:#003366;
+    --ternaire:#6c757d;
+}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    margin-top: -55px;
+    z-index: 100;
+
+}
+
+.header-with-bg {
+    margin-top: 55px;
+    position: relative;
+    background-image: url('../images/intro.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 90vh; 
+  }
+  .header-with-bg .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 51, 102, 0.274);
+    z-index: 1;
+  }
+  
+  .header-with-bg .container {
+    position: relative;
+    z-index: 2;
+  }
+  
+
+.presentation {
+    width: 100%;
+    background: linear-gradient(to right, var(--secondary), var(--primary));
+    margin-top: 55px;
+    padding: 20px;
+    border-radius: 30px;
+
+}
+
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+.card img{
+    width: 100%;
+    height: 300px;
+}
+
+/* login */
+.login-form{
+    margin-top: 55px;
+}
+.login-form h2{
+    color: var(--secondary);
+}
+.login-form input{
+    border-color: var(--primary);
+}
+.login-form label{
+    color: #333;
+}
+.login-form button{
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    
+}
+.login-form p{
+    color: var(--ternaire);
+}
+.login-form a{
+    color: var(--primary); 
+}
+/* fin login */
+
+
+/* Register */
+.register-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    margin-top: 55px;
+}
+.register-form label{
+    color: #333;
+
+}
+.register-form input{
+    border-color: var(--primary);
+}
+.register-form button{
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    
+}
+.register-form p{
+    color: var(--ternaire);
+}
+.register-form a{
+    color: var(--primary); 
+}
+/* .register-form h2 */
+/* fin register */
+footer {
+    background-color: var(--ternaire);
+    color: white;
+    text-align: center;
+}

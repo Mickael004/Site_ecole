@@ -1,0 +1,52 @@
+{% extends 'layouts/master.html' %}
+{% load static %}
+
+{% block content %}
+  <section class="container my-5" style="padding-top: 20px;">
+    <h2 class="text-center mb-4">Notre Histoire</h2>
+    <p class="text-center">Fondée en 2005, notre école s'est spécialisée dans la formation en informatique pour répondre aux besoins croissants du marché du travail.</p>
+  </section>
+
+  <section class="container my-5">
+    <h2 class="text-center mb-4">Nos Valeurs</h2>
+    <ul class="list-group">
+      <li class="list-group-item">Excellence académique</li>
+      <li class="list-group-item">Innovation technologique</li>
+      <li class="list-group-item">Collaboration</li>
+    </ul>
+  </section>
+
+  <section class="container my-5">
+    <h2 class="text-center mb-4">Notre Personnel</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <img src=" {% static 'images/téléchargement.jpeg' %} " class="card-img-top" alt="Professeur 1" />
+          <div class="card-body">
+            <h5 class="card-title">RABESOLOFO Jean</h5>
+            <p class="card-text">Expert en développement web.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="{% static 'images/téléchargement.jpeg' %} " class="card-img-top" alt="Professeur 2" />
+          <div class="card-body">
+            <h5 class="card-title">RAZANABELO Herison</h5>
+            <p class="card-text">Spécialiste en cybersécurité.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src=" {% static 'images/téléchargement.jpeg' %} " class="card-img-top" alt="Professeur 2" />
+          <div class="card-body">
+            <h5 class="card-title">RALITASON Hery</h5>
+            <p class="card-text">Spécialiste en Maintenance Informatique.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
