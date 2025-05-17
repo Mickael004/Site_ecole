@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Membres
 import re #regex
 from datetime import datetime
@@ -19,7 +19,7 @@ def mdp_crypter(password):
 
 def inserer_photo(request,nom):
     if request.FILES.get("photo"):
-        image = request.FILES.get("image")
+        image = request.FILES.get("photo")
         #Enregistrement avec nom unique
         with open(f"static/images/{nom}.jpg","wb") as destination:
             for chunk in image.chunks():
@@ -51,12 +51,22 @@ def inscrire_membre(request):
                             adresse = adresse,
                             telephone = telephone,
                             photo = f"static/images/{inserer_photo(request,dernier)}" ,
+                            email = emails,
                             date_inscription = datetime.now(),
                             password = mdp_crypter(password)
                             
                         )
                         inscrire.save()
-                        return render(request,'register.html',{'erreur':"Inscrite"})
+                        #creation session
+
+                        request.session['client'] = {
+                            "id" : inscrire.id,
+                            "nom" : inscrire.nom,
+                            "prenom" : inscrire.prenom,
+                            "email" : inscrire.email,
+                            "photo" : inscrire.photo
+                        }
+                        return redirect("http://127.0.0.1:8000/")
                     else:
                        return render(request,'register.html',{'erreur':"Mots de passe doit inclure au moins 8 caractères et inclue les lettre et les  chiffre"}) 
                 else:
@@ -68,3 +78,6 @@ def inscrire_membre(request):
         else:
             return render(request,'register.html',{'erreur':"Tous les champs sont obligatoire"})
         
+def deconnection (request):
+    request.session.clear()
+    return render(request,"login.html")
