@@ -5,27 +5,53 @@
     <div class="container">
       <h2 class="text-center mb-4">Nos Formations</h2>
 
-      <form action="" method="get">
-        {% csrf_token %}
+      <form action="{% url 'rechercher' %}" method="GET">
         <input type="text" placeholder="Recherche une Formation" name="search" value="{{request.GET.search}}" />
         <button type="submit">Rechercher</button>
       </form>
-
-      <div class="row">
-        {% for form in formation %}
-          <div class="col-md-4">
-            <div class="card">
-              <img src="{{ form.image.url }}" class="card-img-top" alt="Formation 1" />
-              <div class="card-body">
-                <h5 class="card-title">{{ form.nom }}</h5>
-                <p class="card-text">{{ form.description }}</p>
-                <p>Durée : {{ form.duree }} mois</p>
-                <button><a href="{% url 'detail_form' form.id %}">Detail formation</a></button>
-              </div>
+      {% if mots_rechercher %}
+        <h3>Resultat de la recherche pour {{mots_rechercher}}</h3>
+        <div class="row">
+            {% for form in formation %}
+            
+                    <div class="col-md-4">
+                        <div class="card">
+                        <img src="{{ form.image.url }}" class="card-img-top" alt="Formation 1" />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ form.nom }}</h5>
+                            <p class="card-text">{{ form.description }}</p>
+                            <p>Durée : {{ form.duree }} mois</p>
+                            <button><a href="{% url 'detail_form' form.id %}">Detail formation</a></button>
+                        </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+        </div>
+        {% else %}
+            <div class="row">
+                {% for form in formation %}
+                <div class="col-md-4">
+                    <div class="card">
+                    <img src="{{ form.image.url }}" class="card-img-top" alt="Formation 1" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{ form.nom }}</h5>
+                        <p class="card-text">{{ form.description }}</p>
+                        <p>Durée : {{ form.duree }} mois</p>
+                        <button><a href="{% url 'detail_form' form.id %}">Detail formation</a></button>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-          </div>
-        {% endfor %}
-      </div>
+      
+        {% endif %}
+        {% if erreur %}
+            <div class="container">
+              <p>{{erreur}} </p>
+            </div>
+        {% endif %}
+      
     </div>
   </section>
 {% endblock %}

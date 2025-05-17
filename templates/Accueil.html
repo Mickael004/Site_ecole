@@ -25,24 +25,24 @@
   <section class="bg-light py-5" id="formations">
     <div class="container">
       <h2 class="text-center mb-4">Nos Formations</h2>
-      <div class="row">
-        {% for form in formation %}
+        <div class="row">
+          {% for form in formation %}
           <div class="col-md-4">
             <div class="card">
               <img src="{{form.image.url}}" class="card-img-top" alt="Formation 1" />
               <div class="card-body">
                 <h5 class="card-title">{{form.nom}}</h5>
-                <p class="card-text">{{form.description}}</p>
-                <p>Durée : {{form.duree}} mois</p>
-                <button>
-
+                  <p class="card-text">{{form.description}}</p>
+                  <p>Durée : {{form.duree}} mois</p>
+                  <button>
+                    
                     <a href="{% url 'detail_form' form.id %}">Detail Formation</a>
-                </button>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        {% endfor %}
-    </div>
+          {% endfor %}
+        </div>
     <div>
         <a href="{% url 'plus_formation' %}">Voir plus formations</a>
     </div>

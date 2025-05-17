@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+from django.db.models import Q # pour faire une recherche filtrer
 
 # Create your views here.
 def accueilpage(request):
@@ -26,6 +27,31 @@ def aff_tous(request):
         'formation': formation
     }
     return render(request,'tous_formation.html',context)
+
+#recherche par nom
+def rechercher(request):
+    mots_recherhcer = request.GET.get("search","")
+    donner = Formation.objects.filter(Q(nom__icontains=mots_recherhcer) | Q(nom_prof__icontains=mots_recherhcer)) if mots_recherhcer else Formation.objects.all() # Recherche par nom ou prof
+    
+
+    # if mots_recherhcer:
+    #     donner = Formation.objects.filter(nom__icontains=mots_recherhcer)
+    # else :
+    #     donner = Formation.objects.all()
+
+    if mots_recherhcer and not donner.exists():
+
+        context ={
+            'mots_rechercher' : mots_recherhcer,
+            'erreur' : 'Aucune recherche trouvée'
+        }
+        return render(request,'tous_formation.html',context)
+    else : 
+        context ={
+            'formation':donner,
+            'mots_rechercher' : mots_recherhcer,
+        }
+        return render(request,'tous_formation.html',context)
 
 
 
