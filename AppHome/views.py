@@ -58,8 +58,3 @@ def rechercher(request):
 def apropospage(request):
     return render(request,'Apropos.html')
 
-def loginpage(request):
-    return render(request,'login.html')
-
-def registerpage(request):
-    return render(request,'register.html')

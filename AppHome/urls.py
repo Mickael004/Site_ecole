@@ -8,6 +8,4 @@ urlpatterns = [
     path(r'search',rechercher,name='rechercher'),
 
     path(r'apropos',apropospage,name='apropospage'),
-    path(r'login',loginpage,name='loginpage'),
-    path(r'inscription',registerpage,name='registerpage'),
 ]
