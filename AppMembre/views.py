@@ -6,7 +6,11 @@ import hashlib
 
 # Create your views here.
 def loginpage(request):
-    return render(request,'login.html')
+    if request.session.get('client'):
+        return redirect('accueilpage')
+    else:
+        return render(request,'login.html')
+    
 
 def registerpage(request):
     return render(request,'register.html')
@@ -26,6 +30,7 @@ def inserer_photo(request,nom):
                 destination.write(chunk)
         return f"{nom}.jpg"
 
+#Inscription
 def inscrire_membre(request):
     if request.method == 'POST':
         nom = request.POST.get('nom')
@@ -63,10 +68,12 @@ def inscrire_membre(request):
                             "id" : inscrire.id,
                             "nom" : inscrire.nom,
                             "prenom" : inscrire.prenom,
+                            "telephone":inscrire.telephone,
+                            "adresse": inscrire.adresse,
                             "email" : inscrire.email,
-                            "photo" : inscrire.photo
+                            "photo" : str(inscrire.photo)
                         }
-                        return redirect("http://127.0.0.1:8000/")
+                        return redirect("http://127.0.0.1:8000/",{'message' : 'Connexion réussite'})
                     else:
                        return render(request,'register.html',{'erreur':"Mots de passe doit inclure au moins 8 caractères et inclue les lettre et les  chiffre"}) 
                 else:
@@ -78,6 +85,36 @@ def inscrire_membre(request):
         else:
             return render(request,'register.html',{'erreur':"Tous les champs sont obligatoire"})
         
-def deconnection (request):
+
+# connexion
+def connexion(request):
+    if request.method == 'POST':
+        emails = str(request.POST.get('email',''))
+        password = request.POST.get('password')
+
+        if emails == "" or password == "":
+            return render(request,'login.html', {'erreur':"Tous les champs sont Obligatoires"})
+        
+        try:
+            emailExist = Membres.objects.get(email = emails)
+
+            if mdp_crypter(password) == emailExist.password:
+                membreConnect = {
+                    "id" : emailExist.id,
+                    "nom" : emailExist.nom,
+                    "prenom" : emailExist.prenom,
+                    "telephone":emailExist.telephone,
+                    "adresse": emailExist.adresse,
+                    "email" : emailExist.email,
+                    "photo" : str(emailExist.photo)
+                }
+                request.session['client'] = membreConnect
+                return render(request,'Accueil.html',{'data' :membreConnect},{'message' : 'Connexion réussite'})
+            
+        except Membres.DoesNotExist:
+            return render(request,'login.html',{'erreur': "Vous n'êtes pas inscrit !"})
+
+#Deconnexion
+def deconnexion (request):
     request.session.clear()
     return render(request,"login.html")

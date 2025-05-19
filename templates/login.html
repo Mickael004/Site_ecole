@@ -6,15 +6,19 @@
     <div class="card shadow-lg" style="width: 400px; background-color: #ffffff;">
       <div class="card-body p-5">
         <h2 class="text-center mb-4">Connexion</h2>
-        <form>
+        <div class="container">
+          <p style="color: red; text-align: center;">{{erreur}}</p>
+        </div>
+        <form action="{% url 'connexion_page' %}" method="post">
+          {% csrf_token %}
           <div class="mb-3">
             <label for="username" class="form-label">Nom d'utilisateur ou Email</label>
-            <input type="text" class="form-control" id="username" placeholder="Entrez votre nom d'utilisateur" />
+            <input type="text" class="form-control" id="username" name="email" placeholder="Entrez votre Adresse E-mail" />
           </div>
 
           <div class="mb-3">
             <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe" />
+            <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" />
           </div>
 
           <button type="submit" class="btn btn-primary w-100">Se connecter</button>

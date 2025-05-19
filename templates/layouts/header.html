@@ -13,12 +13,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'apropospage' %}">À Propos</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'loginpage' %}">Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'registerpage' %}">Inscription</a>
-                </li>
+                {% if request.session.client %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'deconnexion' %}">Déconnexion</a>
+                    </li>
+
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'loginpage' %}">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'registerpage' %}">Inscription</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
