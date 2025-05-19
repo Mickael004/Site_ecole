@@ -109,7 +109,10 @@ def connexion(request):
                     "photo" : str(emailExist.photo)
                 }
                 request.session['client'] = membreConnect
-                return render(request,'Accueil.html',{'data' :membreConnect},{'message' : 'Connexion réussite'})
+                # return render(request,'Accueil.html',{'data' :membreConnect},{'message' : 'Connexion réussite'})
+                return redirect("http://127.0.0.1:8000/")
+            else:
+               return render(request,'login.html',{'erreur': "Vérifier votre Mots de passe !"}) 
             
         except Membres.DoesNotExist:
             return render(request,'login.html',{'erreur': "Vous n'êtes pas inscrit !"})
