@@ -1,6 +1,6 @@
 {% extends 'layouts/master.html' %}
 {% block content %}
-  <section style="margin-top: 55px;">
+  <section style="margin-top: 55px;" class="bg-light py-5" id="formations">
     <h2 style="margin-top: 40px;">Detaile du formation</h2>
     <div class="formations">
         <img src="{{detail_formation.image.url}}" alt="">
@@ -11,12 +11,12 @@
         <p>Date Debut de formation : {{detail_formation.debut_formation}}</p>
         <p>Detail de programme : {{detail_formation.detail_programme}}</p>
         {% if request.session.client %}
-          <a href="">
-            <button>Acheter</button>
+          <a href="{% url 'inscrire_formation' detail_formation.id %}">
+            <button>Inscrire</button>
           </a>
         {% else %}
           <a href="{% url 'loginpage' %}">
-            <button>Acheter</button>
+            <button>Inscrire</button>
           </a>
         {% endif %}
         

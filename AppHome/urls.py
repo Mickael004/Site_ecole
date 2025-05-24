@@ -3,7 +3,7 @@ from .views import*
 
 urlpatterns = [
     path(r'',accueilpage,name='accueilpage'),
-    path(r'detail_formation/<int:id>',aff_detail,name='detail_form'),
+    path(r'detail_formation/<int:form_id>',aff_detail,name='detail_form'),
     path(r'topus/formation/',aff_tous,name='plus_formation'),
     path(r'search',rechercher,name='rechercher'),
 

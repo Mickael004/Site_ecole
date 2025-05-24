@@ -1,0 +1,64 @@
+{% extends 'layouts/master.html' %}
+
+{% block content %}
+
+<section class="register-form">
+    <div class="card shadow-lg" style="width: 400px; background-color: #ffffff;">
+      <div class="card-body p-5">
+        <h2 class="text-center mb-4">INSCRIPTION</h2>
+
+
+        <form method="post" action="{% url 'validation_inscription' %}" enctype="multipart/form-data" >
+          {% csrf_token %}
+
+          <div>
+            <p style="color:red" >{{erreur}}</p>
+          </div>
+          {% comment %} <p>{{request.session.client.nom}}</p> {% endcomment %}
+          <div class="mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="name" name="nom" placeholder="Entrez votre nom " />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Prénoms</label>
+            <input type="text" class="form-control" id="name" name="prenom" placeholder="Entrez votre prenom " />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Adresse</label>
+            <input type="text" class="form-control" name='adresse'id="adresse" placeholder="Entrez votre adresse" />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Telephone</label>
+            <input type="text" class="form-control" id="tel" name="telephone" placeholder="Entrez votre telephone " />
+          </div>
+          <div class="mb-3">
+            <label for="dateN" class="form-label">Date de naissance</label>
+            <input type="date" class="form-control" name='dateN'id="dateN"  />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Formation</label>
+            <input type="text" class="form-control" name='formation'id="formation" disabled value="{{detail_formation.nom}}" />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Frais de Formations</label>
+            <input type="texte" class="form-control" name='frais_formation'id="frais" value="{{detail_formation.frais_formation}}" disabled/>
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Date Debut</label>
+            <input type="texte" class="form-control" name='dateDebut'id="formation" disabled value="{{detail_formation.debut_formation}}" />
+          </div>
+
+          <div class="mb-3" >
+            <label for="">S'inscrire seulement mais pas de paiement a faire</label>
+            <input type="checkbox" name="choix_non_paye" id="">
+          </div>
+          <div class="mb-3">
+            <label for="">Payement immédiate</label>
+            <input type="checkbox" name="choix_payer" id="">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Vallider</button>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

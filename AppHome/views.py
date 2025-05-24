@@ -13,10 +13,10 @@ def accueilpage(request):
 
 
 
-def aff_detail(request,id):
-    formation = Formation.objects.get(id=id)
+def aff_detail(request,form_id):
+    formation = Formation.objects.get(id=form_id)
     context = {
-        'detail_fromation':formation
+        'detail_formation':formation
     }
     return render(request,'detail.html',context)
 # def aff_tous(request):
