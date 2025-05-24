@@ -3,6 +3,7 @@ from .models import Membres
 import re #regex
 from datetime import datetime
 import hashlib
+from django.contrib.auth import logout
 
 # Create your views here.
 def loginpage(request):
@@ -118,6 +119,11 @@ def connexion(request):
             return render(request,'login.html',{'erreur': "Vous n'êtes pas inscrit !"})
 
 #Deconnexion
-def deconnexion (request):
+# def deconnexion (request):
+#     request.session.clear()
+#     return render(request,"login.html")
+
+def deconnexion(request):
+    logout(request)
     request.session.clear()
-    return render(request,"login.html")
+    return redirect('loginpage')
