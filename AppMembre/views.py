@@ -90,7 +90,8 @@ def inscrire_membre(request):
 # connexion
 def connexion(request):
     if request.method == 'POST':
-        emails = str(request.POST.get('email',''))
+        # emails = str(request.POST.get('email',''))
+        emails = request.POST.get('email')
         password = request.POST.get('password')
 
         if emails == "" or password == "":
