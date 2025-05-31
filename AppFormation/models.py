@@ -12,5 +12,7 @@ class FormationInscrit(models.Model):
     frais_formation = models.CharField(max_length=20)
     date_Debut = models.TextField()
     date_Inscription = models.DateTimeField(auto_now_add=True)
-    choix_nompayer = models.BooleanField(default=False)
+    choix_non_payer = models.BooleanField(default=False)
     choix_payer = models.BooleanField(default=False)
+    def __str__(self):
+        return self.nom

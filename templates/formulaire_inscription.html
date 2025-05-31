@@ -37,20 +37,21 @@
           </div>
           <div class="mb-3">
             <label for="name" class="form-label">Formation</label>
-            <input type="text" class="form-control" name='formation'id="formation" disabled value="{{detail_formation.nom}}" />
+            <input type="text" class="form-control" name='formation'id="formation" readonly
+             value="{{detail_formation.nom}}" />
           </div>
           <div class="mb-3">
             <label for="name" class="form-label">Frais de Formations</label>
-            <input type="texte" class="form-control" name='frais_formation'id="frais" value="{{detail_formation.frais_formation}}" disabled/>
+            <input type="texte" class="form-control" name='frais_formation'id="frais" readonly value="{{detail_formation.frais_formation}}" />
           </div>
           <div class="mb-3">
             <label for="name" class="form-label">Date Debut</label>
-            <input type="texte" class="form-control" name='dateDebut'id="formation" disabled value="{{detail_formation.debut_formation}}" />
+            <input type="texte" class="form-control" name='date_Debut'id="formation" readonly value="{{detail_formation.debut_formation}}" />
           </div>
 
           <div class="mb-3" >
             <label for="">S'inscrire seulement mais pas de paiement a faire</label>
-            <input type="checkbox" name="choix_non_paye" id="">
+            <input type="checkbox" name="choix_non_payer" id="">
           </div>
           <div class="mb-3">
             <label for="">Payement immédiate</label>
