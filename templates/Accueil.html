@@ -46,10 +46,70 @@
             </div>
           {% endfor %}
         </div>
-    <div>
+    <div class="container" style="text-align: center;" >
         <a href="{% url 'plus_formation' %}">Voir plus formations</a>
     </div>
     </div>
+  </section>
+
+  <section class="py-5 filtre">
+    <div class="container">
+      <h2 class="text-center mb-4">Tous Formations</h2>
+      <div class="btnForma" style="text-align: center; border: none;  " >
+        <button type="button" onclick="afficher('Tous')" >Tous</button>
+        {% for autre in form_unique %}
+          <button type="button" onclick="afficher('{{autre}}')" id="button{{autre}}">{{autre}}</button>
+        {% endfor %}
+
+      </div>
+      <!-- filtre tous formation -->
+      <div class="tous_formation" >
+        <div class="row " >
+          {% for formation in tous_formation %}
+            <div class="col-md-4 liste_formation " style="margin-top: 0.5%;">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{formation.nom}}</h5>
+                    <p class="card-text">{{formation.debut_formation}}</p>
+                    <p>Frais de Formation : {{formation.frais_formation}} Ariary</p>
+                    <button>
+                      
+                      <a href="{% url 'detail_form' formation.id %}">Detail Formation</a>
+                    </button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+       <!-- sliste frmation autre-->
+      <div class="list_formation">
+        <div class="row">
+          {% for autres in form_unique %}
+            <div class="col-md-4 {{autres}} Tous liste_formation div_autre" >
+              {% for formation in tous_formation %}
+                {% if formation.nom == autres %}
+                  
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">{{formation.nom}}</h5>
+                          <p class="card-text">{{formation.debut_formation}}</p>
+                          <p>Frais de Formation : {{formation.frais_formation}} Ariary</p>
+                          <button>
+                            
+                            <a href="{% url 'detail_form' formation.id %}">Detail Formation</a>
+                          </button>
+                      </div>
+                    </div>
+                  
+                {% endif %}
+              {% endfor %}
+
+            </div>
+          {% endfor %}
+        </div>
+      </div>
   </section>
 
   <!-- Section Témoignages -->
@@ -92,4 +152,33 @@
       </form>
     </div>
   </section>
+
+
+<script>
+  var autre = document.querySelectorAll('.div_autre')
+  autre.forEach(liste =>{
+    liste.style.display='none'
+  });
+
+  function afficher(formation) {
+    // console.log(formation);
+    const list_forma = document.querySelectorAll('.liste_formation');
+    list_forma.forEach(liste => {
+      if (liste.classList.contains(formation)) {
+        liste.style.display = 'block'  
+      } else {
+        liste.style.display = 'none'
+      }
+    })
+  }
+
+</script>
+
+
+  <style>
+    /* index */
+  .filtre .btnForma{
+    text-align: center;
+  }
+  </style>
 {% endblock %}

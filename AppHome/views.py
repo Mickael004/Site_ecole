@@ -4,10 +4,16 @@ from django.db.models import Q # pour faire une recherche filtrer
 
 # Create your views here.
 def accueilpage(request):
-    #formation = Formation.objects.all() [:3]#Afficher seulement les 3 premier formation
+    formation_tous = Formation.objects.all()
     formation = Formation.objects.order_by('-date_pub')[:3]#Affichage seulement les 3 premier le nouveaux
+
+    forma_unique = set(form.nom for form in formation_tous) #Formation avec d esorina ny doublon
+                        # for form in formation_tous:
+                        #     form.nom
     context = {
-        'formation': formation
+        'formation': formation,
+        'form_unique':forma_unique,
+        'tous_formation':formation_tous
     }
     return render(request,'Accueil.html',context)
 
