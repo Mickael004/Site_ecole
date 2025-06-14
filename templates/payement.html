@@ -3,5 +3,69 @@
 {% block content %}
     <section style="margin-top: 55px; " class="bg-light py-5" id="formations">
         <h2>Payement</h2>
+        <form action="">
+            {% csrf_token %}
+            <input type="email" name="" id="" placeholder="Entrer votre Email">
+            <div>
+                <label for="">Nom de formation</label>
+                <input type="text" name="formation" id="formation" value="">
+            </div>
+
+            <table>
+                <tr>
+                    <th>Frais Mensuelle</th>
+                    <th>Nombre Mois</th>
+                    <th>Total Frais</th>
+                </tr>
+
+                {% if 'panier' in request.session %}
+                    {% for frais in request.session.panier  %}
+                        <tr>
+
+                            <td>
+                                <input type="number" name="frais_formation" id="frais_formation" value="{{frais.frais_formation}}" readonly > 
+                            </td>
+                            <td><input type="number" name="nombre_mois" id="nombre_mois" placeholder="Nombre de mois" ></td>
+                            <td><input type="number" name="Total_frais" id="total_frais"  ></td>
+                        </tr>
+                    {% endfor %}
+                
+                {% endif %}
+
+                
+
+            </table>
+            
+            <div>
+                <label for="">Droit de Formation</label>
+                <input type="number" name="droit" id="">
+            </div>
+            <div>
+                <label for="">Prix Total à payer</label>
+                <input type="number" name="prix_total" id="prix_total">
+            </div>
+            <h2>Information Carte</h2>
+            <div class="card"></div>
+            <button>Effectuer Payement</button>
+
+        </form>
     </section>
+
+    <script>
+        const nom_formation = document.getElementById('formation')
+        const frais_formation = document.getElementById('frais_formation')
+        const nombre_mois = document.getElementById('nombre_mois')
+        const total = document.getElementById('total_frais')
+
+        nom_formation.value = sessionStorage.getItem('formation')
+        
+        nombre_mois.addEventListener('input',function(){
+            const frais = parseFloat(frais_formation.value) || 0;
+            const mois = parseInt(nombre_mois.value) || 0;
+            total.value = frais*mois
+        })
+
+        
+        {% comment %} console.log(frais_formation.value)  {% endcomment %}
+    </script>
 {% endblock %}

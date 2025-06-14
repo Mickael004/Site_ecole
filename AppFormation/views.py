@@ -13,7 +13,41 @@ def inscrire_formation(request,form_id):
         'detail_formation':formation,
         'user': user
     }
+# panier frais
+    # if 'panier' not in request.session:
+    #     request.session['panier'] = []
+    # cart = request.session["panier"]
+    # donner = {
+    #     "id_formation": form_id,
+    #     "formation":formation.nom,
+    #     "frais_formation":formation.frais_formation
+    # }
+
+    # if donner in cart:
+    #     cart.append(donner)
+    #     request.session.modified = True
+    donner = {
+        "id_formation": form_id,
+        "formation":formation.nom,
+        "frais_formation":formation.frais_formation
+    }
+    if 'panier' not in request.session:
+        request.session['panier'] = []
+
+    request.session['panier'].append(donner)
+    request.session.modified = True
+
     return render(request,'formulaire_inscription.html',context)
+
+def supprimerPanier(request,form_id):
+    if 'panier' in request.session:
+        panier = request.sessio['panier']
+        for index, form in enumerate(panier):
+            if form['id_formation'] == form_id:
+                del panier[index]
+                break
+        request.session['panier'] = panier
+    return redirect("payement_inscription")
 
 def validation_inscription(request):
     if request.method == 'POST':
@@ -51,7 +85,15 @@ def validation_inscription(request):
     return render(request,'formulaire_inscription.html')
 
 def payement_inscription(request):
+    # formation = FormationInscrit.objects.get(id=form_id)
+    # user = request.session.get('client')
+    # context = {
+    #     'formation_inscrit':formation,
+    #     'user': user
+    # }
     return render(request,'payement.html')
+
 
 def confirmation_inscription(request):
     return render(request,'confirmation_inscription.html')
+
